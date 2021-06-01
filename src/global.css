@@ -1,9 +1,9 @@
 #root {
   --background-color: #f0f0f0;
-  --button-color: #2C5288;
+  --secundary-color: #2C5288;
   --red-color: #E63946;
   --primary-color: #457B9D;
-  --secundary-color: #1D3557;
+  --button-color: #1D3557;
   --white-color: #cacad0;
 }
 
@@ -16,4 +16,22 @@
   border: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.loading-view {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-radius: 50%;
+  border-top: 3px solid var(--secundary-color);
+  animation: spin-loading 1s infinite ease;
+}
+
+@keyframes spin-loading {
+  to {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(-360deg);
+  }
 }
