@@ -2,6 +2,8 @@ import React from 'react';
 import Header from '../../components/Header';
 import ProductsView from '../../components/Product';
 
+import './index.css';
+
 export default function Product() {
   return (
     <div className="product">
