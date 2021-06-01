@@ -14,7 +14,7 @@ interface ProductsProps {
 
 const ProductsView: React.FC<ProductsProps> = ({props}) => {
   return (
-    <div className="product">
+    <div className="product-view">
       <img src={props.image} alt={props.name} />
       <h3 className="title">{props.name}</h3>
       <p className="description">{props.description}</p>
