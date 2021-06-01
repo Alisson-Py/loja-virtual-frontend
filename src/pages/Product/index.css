@@ -1,0 +1,21 @@
+.product main {
+  padding-top: 40px;
+  padding: 40px;
+}
+
+.product main section {
+  width: 100%;
+}
+
+.product main section .sub-title {
+  color: var(--secundary-color);
+  padding-bottom: 20px;
+}
+
+.product main section .product-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-row-gap: 10px;
+  
+  margin-bottom: 20px;
+}
