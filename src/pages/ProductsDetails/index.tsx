@@ -25,11 +25,11 @@ export default function ProductsDetails() {
           <div className="image">
             <img src={productIcon} alt="producto" />
           </div>
-          <div className="content">
+          <div className="content-2">
             <p className="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos quam ullam distinctio harum repellendus? Voluptatum soluta maxime facilis reiciendis, nulla, inventore eum.</p>
             <div className="price-and-shop">
-            <p className="value">11111</p>
-            <button>Comprar</button>
+              <p className="value">11111</p>
+              <button>Comprar</button>
             </div>
           </div>
         </div>
