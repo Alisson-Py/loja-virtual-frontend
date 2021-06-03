@@ -6,7 +6,7 @@ import './index.css';
 
 export default function Product() {
   const description = 'Lorem ipsum dolor sit amet ullam alias. Et, magnam consequuntur eveniet iure. Possimus temporibus quas commodi.'
-  const data = {description, image: 'eawerawa', name: 'afarwawar', value: 1200, id: 1}
+  const data = {description, image: 'eawerawa', name: 'afarwawar', value: 1200, id: '1'}
   return (
     <div className="product">
       <Header title="Produtos"/>
