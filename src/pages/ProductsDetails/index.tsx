@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import { Link } from 'react-router-dom';
 
 import './index.css';
-import leftArrowIcon from '../../assets/arrow-left-icon.svg';
+import leftArrowIcon from '../../assets/arrow-back-icon.svg';
 import favoriteIcon from '../../assets/favorite-icon.svg';
 import productIcon from '../../assets/product-icon.png';
 
