@@ -5,7 +5,6 @@ import './index.css';
 import userIcon from '../../assets/user-icon.svg';
 
 export default function Register() {
-  const [visiblePassword, setVisiblePassord]  = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   function handleRegister() {
