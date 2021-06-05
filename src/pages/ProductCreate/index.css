@@ -1,0 +1,87 @@
+.product-create main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    padding: 20px;
+}
+
+.product-create main .form {
+    width: 450px;
+    height: auto;
+    border-radius: 10px;
+    border:2px solid var(--primary-color);
+    padding: 30px 15px;
+}
+
+.product-create main .form .img {
+    width: 225px;
+    height: 225px;
+    border-radius: 50%;
+    background-color: #dadada;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.product-create main .form .img #add-file {
+    display: none;
+}
+
+.product-create main .form .img .clear-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.product-create main .form .img label .add {
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.product-create main .form .img .clear-bg img {
+    width: 30px;
+    height: 30px;
+    background-color: var(--red-color);
+    border-radius: 50%;
+}
+
+.product-create main .form input {
+    width: 100%;
+    height: 40px;
+    color: #5c5c5c;
+    padding-left: 5px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #6c6c6c;
+}
+
+.product-create main .form .input-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-create main .form button {
+    width: 100%;
+    height: 40px;
+    background-color: var(--button-color);
+    border-radius: 4px;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#invisible {
+    display: none;
+}
