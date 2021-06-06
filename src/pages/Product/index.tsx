@@ -8,7 +8,7 @@ import './index.css';
 export interface ProductsTypes {
   id: string;
   image: string;
-  name: string;
+  title: string;
   description: string;
   value: number;
 }
