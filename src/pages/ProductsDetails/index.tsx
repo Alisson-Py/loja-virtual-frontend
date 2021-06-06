@@ -1,13 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
+import {ProductsTypes} from '../Product'
 
 import './index.css';
 import leftArrowIcon from '../../assets/arrow-back-icon.svg';
 import favoriteIcon from '../../assets/favorite-icon.svg';
 import productIcon from '../../assets/product-icon.png';
+import api from '../../services/api';
 
-export default function ProductsDetails() {
+interface ProductType extends ProductsTypes {
+  quantity: number;
+  isPromotion: boolean;
+  percent?: number;
+}
+
+export default function ProductsDetails(props: RouteComponentProps) {
+  const [product, setProduct] = useState<ProductType>();
+
+  useEffect(() => {
+    const params = props.match.params;
+    api.get('/product', {
+      params
+    }).then(res => {
+      setProduct(res.data);
+    }).catch(err => {
+      console.log(err.message);
+    }).finally(() => {
+    });
+  },[])
+  if (!product) return (
+    <div className="product-details">
+      <Header title="Loading..."/>
+    </div>
+  );
   return (
     <div className="products-details">
       <Header title="Detalhes"/>
@@ -16,7 +42,7 @@ export default function ProductsDetails() {
           <Link to="/">
             <img src={leftArrowIcon} alt="back" />
           </Link>
-          <h2>title</h2>
+          <h2>{product.title}</h2>
           <button>
             <img src={favoriteIcon} alt="gostei" />
           </button>
@@ -26,9 +52,9 @@ export default function ProductsDetails() {
             <img src={productIcon} alt="producto" />
           </div>
           <div className="content-2">
-            <p className="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos quam ullam distinctio harum repellendus? Voluptatum soluta maxime facilis reiciendis, nulla, inventore eum.</p>
+            <p className="description">{product.description}</p>
             <div className="price-and-shop">
-              <p className="value">11111</p>
+              <p className="value">{product.value}</p>
               <button>Comprar</button>
             </div>
           </div>
