@@ -10,7 +10,7 @@ interface ProductsProps {
   props: {
     id: string;
     image: string;
-    name: string;
+    title: string;
     description: string;
     value: number;
   }
@@ -25,8 +25,8 @@ const ProductsView: React.FC<ProductsProps> = ({props}) => {
 
   return (
     <div className="product-view" onClick={() => handleNavigateToProductDetails(props.id)}>
-      <img src={productIcon} alt={props.name} className="img" />
-      <h3 className="title">{props.name}</h3>
+      <img src={productIcon} alt={props.title} className="img" />
+      <h3 className="title">{props.title}</h3>
       <p className="description">{props.description}</p>
       <p className="value"><strong>{CurrencyConverter(props.value)}</strong><br/>
         ou

@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import ProductsView from '../../components/Product';
+import api from '../../services/api';
 
 import './index.css';
 
+export interface ProductsTypes {
+  id: string;
+  image: string;
+  title: string;
+  description: string;
+  value: number;
+}
+
 export default function Product() {
-  const description = 'Lorem ipsum dolor sit amet ullam alias. Et, magnam consequuntur eveniet iure. Possimus temporibus quas commodi.'
-  const data = {description, image: 'eawerawa', name: 'afarwawar', value: 1200, id: '1'}
+  const [products, setProducts] = useState<ProductsTypes[]>([]);
+
+  useEffect(() => {
+    api.get('/products').then(res => {
+      setProducts(res.data);
+    }).catch(err => {
+      alert(err.message);
+    });
+  },[]);
+
   return (
     <div className="product">
       <Header title="Produtos"/>
@@ -15,8 +32,8 @@ export default function Product() {
           <h2 className="sub-title">Recentes</h2>
           <div className="product-container">
           {
-            [1,2,3,4,5,6,7,8,9,0].map(item => (
-              <ProductsView props={data} key={item}/>
+            products.map((item, index) => (
+              <ProductsView props={item} key={index}/>
             ))
           }
           </div>
@@ -25,8 +42,8 @@ export default function Product() {
           <h2 className="sub-title">Em promoção</h2>
           <div className="product-container">
           {
-            [1,2,3,4,5,6,7,8,9,0].map(item => (
-              <ProductsView props={data} key={item}/>
+            products.map((item, index) => (
+              <ProductsView props={item} key={index}/>
             ))
           }
           </div>
