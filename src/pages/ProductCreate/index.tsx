@@ -18,7 +18,7 @@ export default function ProductCreate() {
 
   async function handleCreateProduct() {
     setLoading(true);
-    const data = new FormData;
+    const data = new FormData();
 
     data.append('name', name);
     data.append('description', description);
