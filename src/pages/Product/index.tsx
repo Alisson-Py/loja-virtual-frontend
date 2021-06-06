@@ -5,7 +5,7 @@ import api from '../../services/api';
 
 import './index.css';
 
-interface ProductsTypes {
+export interface ProductsTypes {
   id: string;
   image: string;
   name: string;
