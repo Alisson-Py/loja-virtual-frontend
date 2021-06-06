@@ -3,15 +3,39 @@ import Header from '../../components/Header';
 
 import './index.css';
 import userIcon from '../../assets/user-icon.svg';
+import api from '../../services/api';
 
 export default function Register() {
   const [loading, setLoading] = useState<boolean>(false);
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [repitePassword, setRepeatPassword] = useState<string>('');
 
   function handleRegister() {
     setLoading(true);
-    setLoading(false);
+    const data = {
+      firstName,
+      lastName,
+      email,
+      password
+    };
+    if(password !== repitePassword) {
+      alert('wrong password');
+      setLoading(false);
+      return;
+    };
+    api.post('/users', data).then(res => {
+      console.log(res);
+    }).catch(err => {
+      alert(err.response.data.err);
+    }).finally(() => {
+      setLoading(false);
+    });
 
   }
+  
   return (
     <div className="register">
       <Header title="Register"/>
@@ -27,6 +51,8 @@ export default function Register() {
               id="first-name"
               placeholder="Digite seu nome..."
               autoComplete='off'
+              value={firstName}
+              onChange={e => setFirstName(e.target.value)}
             />
 
             <input
@@ -35,6 +61,8 @@ export default function Register() {
               id="last-name"
               placeholder="Digite seu sobrenome..."
               autoComplete='off'
+              value={lastName}
+              onChange={e => setLastName(e.target.value)}
             />
 
             <input
@@ -43,6 +71,8 @@ export default function Register() {
               id="email"
               placeholder="Digite seu email..."
               autoComplete='off'
+              value={email}
+              onChange={e => setEmail(e.target.value)}
             />
             
             <input
@@ -51,13 +81,19 @@ export default function Register() {
               id="password"
               placeholder="Digite uma senha..."
               autoComplete='off'
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
             <input
               type="password"
               name="repeat-password"
               id="repeat-password"
+              className={password !== repitePassword? "wrong-password": ""}
               placeholder="Repita sua senha..."
               autoComplete='off'
+              value={repitePassword}
+              onChange={e => setRepeatPassword(e.target.value)}
+              
             />
 
             <button onClick={handleRegister}>
