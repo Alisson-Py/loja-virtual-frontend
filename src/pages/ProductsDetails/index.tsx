@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps, useHistory } from 'react-router-dom';
 import {ProductsTypes} from '../Product'
 
 import './index.css';
@@ -16,6 +16,7 @@ interface ProductType extends ProductsTypes {
 }
 
 export default function ProductsDetails(props: RouteComponentProps) {
+  const history = useHistory();
   const [product, setProduct] = useState<ProductType>();
 
   useEffect(() => {
@@ -29,6 +30,11 @@ export default function ProductsDetails(props: RouteComponentProps) {
     }).finally(() => {
     });
   },[])
+
+  function handleGoBack() {
+    history.goBack()
+  }
+
   if (!product) return (
     <div className="product-details">
       <Header title="Loading..."/>
@@ -39,11 +45,16 @@ export default function ProductsDetails(props: RouteComponentProps) {
       <Header title="Detalhes"/>
       <main>
         <div className="header">
-          <Link to="/">
+          <button
+            className="button"
+            onClick={handleGoBack}
+          >
             <img src={leftArrowIcon} alt="back" />
-          </Link>
+          </button>
           <h2>{product.title}</h2>
-          <button>
+          <button
+            className="button"
+          >
             <img src={favoriteIcon} alt="gostei" />
           </button>
         </div>

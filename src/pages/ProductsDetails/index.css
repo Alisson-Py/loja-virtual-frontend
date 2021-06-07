@@ -11,6 +11,16 @@
   margin-bottom: 40px;
 }
 
+.products-details main .header .button {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.products-details main .header .button img {
+  width: 30px;
+  height: 30px;
+}
+
 .products-details main .content {
   width: 100%;
   display: flex;
