@@ -12,7 +12,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({title}) => {
   return (
     <header>
-      <Link to='/cart' className="link">
+      <Link to='#' className="link">
         <img src={cartIcon} alt="cart" about="cart"/>
       </Link>
       <h1 className="title">{title}</h1>
