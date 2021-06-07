@@ -4,8 +4,10 @@ import Header from '../../components/Header';
 import './index.css';
 import userIcon from '../../assets/user-icon.svg';
 import api from '../../services/api';
+import { useHistory } from 'react-router';
 
 export default function Register() {
+  const history = useHistory();
   const [loading, setLoading] = useState<boolean>(false);
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
@@ -27,7 +29,12 @@ export default function Register() {
       return;
     };
     api.post('/users', data).then(res => {
-      console.log(res);
+      localStorage.setItem('id', res.data.id);
+      localStorage.setItem('email', email);
+      localStorage.setItem('firstName', firstName);
+      localStorage.setItem('lastName', lastName);
+      localStorage.setItem('token', res.data.token);
+      history.goBack();
     }).catch(err => {
       alert(err.response.data.err);
     }).finally(() => {
