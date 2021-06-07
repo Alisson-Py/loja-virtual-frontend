@@ -29,7 +29,7 @@ export default function ProductsDetails(props: RouteComponentProps) {
       console.log(err.message);
     }).finally(() => {
     });
-  },[])
+  },[props])
 
   function handleGoBack() {
     history.goBack()
