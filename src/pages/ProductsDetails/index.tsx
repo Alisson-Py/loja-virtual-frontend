@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
-import { Link, RouteComponentProps, useHistory } from 'react-router-dom';
+import { RouteComponentProps, useHistory } from 'react-router-dom';
 import {ProductsTypes} from '../Product'
 
 import './index.css';
 import leftArrowIcon from '../../assets/arrow-back-icon.svg';
 import favoriteIcon from '../../assets/favorite-icon.svg';
-import productIcon from '../../assets/product-icon.png';
 import api from '../../services/api';
+import CurrencyConverter from '../../utils/CurrencyConverter';
 
 interface ProductType extends ProductsTypes {
   quantity: number;
@@ -58,15 +58,33 @@ export default function ProductsDetails(props: RouteComponentProps) {
             <img src={favoriteIcon} alt="gostei" />
           </button>
         </div>
-        <div className="content">
-          <div className="image">
-            <img src={productIcon} alt="producto" />
-          </div>
-          <div className="content-2">
+        
+        <div className="content-view">
+          <img src={product.image} alt={product.title} className="image" />
+          <div className="content">
             <p className="description">{product.description}</p>
-            <div className="price-and-shop">
-              <p className="value">{product.value}</p>
-              <button>Comprar</button>
+            <div className="informations">
+              <p className="value"><strong>{CurrencyConverter(product.value)} a vista</strong><br/>ou<br/><strong>10x {CurrencyConverter(product.value / 10)} sem juros.</strong></p>
+              <span
+                className="quantity"
+                id={product.quantity === 0? 'hidden':''}
+              > <strong>estoque: </strong>{
+                product.quantity <= 10?
+                `apenas ${product.quantity}`:
+                `${product.quantity} unidades`
+                }
+              </span>
+              <button
+                className="buy-button"
+                id={product.quantity === 0? 'disable': ''}
+                onClick={() => {}}
+              >
+                {
+                  product.quantity === 0?
+                  'out of stock':
+                  'comprar'
+                }
+              </button>
             </div>
           </div>
         </div>
