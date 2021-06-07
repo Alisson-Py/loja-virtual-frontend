@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({title}) => {
 
   useEffect(() => {
     setName(localStorage.getItem('firstName'));
-  });
+  },[]);
 
   function handleLoOutUser() {
     localStorage.removeItem('id');
