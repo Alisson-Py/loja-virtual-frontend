@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Header from '../../components/Header';
 
 import './index.css';
 
 export default function AddCart() {
   const [fullName, setFullName] = useState<string>();
-  const [cardNumber, sertCardNumber] = useState<number>();
-  const [cardNumberView, sertCardNumberView] = useState<number>();
+  const [cardNumber, setCardNumber] = useState<number>();
+  const [cardNumberView, setCardNumberView] = useState<string>();
   const [expirationDate, setExpirationDate] = useState<string>();
   const [ccv, setCcv] = useState<number>();
 
@@ -16,6 +16,25 @@ export default function AddCart() {
 
   }
 
+  function maskInput(value: number): string {
+    // const mask = 'xxxx xxxx xxxx xxxx';
+    // const valueStr = value.toString().split('');
+    // const returnedmask = mask.split('').map((item, index) => {
+    //   if(valueStr[index]){
+    //     return valueStr[index];
+    //   };
+    //   if ((index - 5)%4 === 0) return `${item}`
+    //   return item;
+    // });
+    // return returnedmask.join('');
+    return value.toString();
+  }
+
+  function updateCardNumber(e: ChangeEvent<HTMLInputElement>) {
+    setCardNumber(Number(e.target.value));
+    setCardNumberView(maskInput(Number(e.target.value)))
+  }
+
   return (
     <div className="add-card">
       <Header title="Adicionar Cartao"/>
@@ -23,8 +42,8 @@ export default function AddCart() {
         <div className="content">
           <div className="card-view">
             <p className="card-number">{
-              cardNumber?
-              cardNumber:
+              cardNumberView?
+              cardNumberView:
               'xxxx xxxx xxxx xxxx'
             }</p>
             <div className="botton-card-data">
@@ -55,7 +74,7 @@ export default function AddCart() {
               placeholder="Digite o nome do titular..."
               autoComplete='off'
               value={fullName}
-              onChange={e => setFullName(e.target.value)}
+              onChange={e => setFullName(e.target.value.toUpperCase())}
             />
             <input
               type="text"
@@ -65,7 +84,7 @@ export default function AddCart() {
               autoComplete='off'
               maxLength={16}
               value={cardNumber}
-              onChange={e => sertCardNumber(Number(e.target.value))}
+              onChange={updateCardNumber}
             />
             <div className="date-and-ccv-input">
               <input
@@ -76,7 +95,11 @@ export default function AddCart() {
                 autoComplete='off'
                 maxLength={5}
                 value={expirationDate}
-                onChange={e => setExpirationDate(e.target.value)}
+                onChange={e => setExpirationDate(
+                  e.target.value.length === 2?
+                  e.target.value + '/':
+                  e.target.value
+                )}
               />
               <input
                 type="text"
