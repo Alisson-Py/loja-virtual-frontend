@@ -79,7 +79,8 @@ export default function Profile() {
             <div className="data-block">
               <h3>Endereço</h3>
               <p>
-                {user.street}, {user.numberHome}<br/>
+                {user.street}<br/>
+                {user.numberHome}<br/>
                 {user.district}<br/>
                 {user.city}, {user.state}, {user.country}
               </p>
