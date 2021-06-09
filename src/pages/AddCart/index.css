@@ -1,0 +1,29 @@
+.add-card main .content{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+}
+
+.add-card main .content .card-view {
+  width: 400px;
+  height: 250px;
+  border: 2px solid var(--primary-color);
+  font-size: 1.3rem;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #3c3c3c;
+}
+
+.add-card main .content .card-view .botton-card-data {
+  width: fit-content;
+}
+
+.add-card main .content .card-view .botton-card-data .date-and-ccv {
+  display: flex;
+  justify-content: space-between;
+}
