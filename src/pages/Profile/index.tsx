@@ -24,18 +24,40 @@ interface UsersTypes {
   hierarchy: 'owner' | 'user';
 }
 
+interface CreditCardTypes {
+  id: string;
+  creditCardNumber: string;
+  fullName: string;
+  expirationDate: string;
+}
+
 export default function Profile() {
   const [user, setUser] = useState<UsersTypes>();
+  const [creditCard, setCreditCard] = useState<CreditCardTypes[]>();
 
   useEffect(() => {
     const id = localStorage.getItem('id');
+    const token = localStorage.getItem('token');
+
     api.get(`/user/${id}`).then((res) => {
       const data = res.data as UsersTypes
       setUser(data);
-   }).catch(err => {
-     console.log(err.message)
-   })
-  },[])
+    }).catch(err => {
+      console.log(err.message)
+    })
+
+    api.get('/cards',{
+      headers: {
+        authorization: `Baerer ${token}`
+      }
+    }).then(res => {
+    const data = res.data as CreditCardTypes[];
+    setCreditCard(data);
+    }).catch(err => {
+      alert('nao deu pra buscar os cartoes de creditos');
+    });
+
+  },[]);
 
   if (!user) return (
     <div className="profile">
