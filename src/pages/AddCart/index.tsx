@@ -63,6 +63,7 @@ export default function AddCart() {
               id="card-number"
               placeholder="Digite o numero do cartao..."
               autoComplete='off'
+              maxLength={16}
               value={cardNumber}
               onChange={e => sertCardNumber(Number(e.target.value))}
             />
@@ -73,6 +74,7 @@ export default function AddCart() {
                 id="expiration-date"
                 placeholder="Digite o expiration date..."
                 autoComplete='off'
+                maxLength={5}
                 value={expirationDate}
                 onChange={e => setExpirationDate(e.target.value)}
               />
@@ -83,6 +85,7 @@ export default function AddCart() {
                 placeholder="Digite o ccv..."
                 autoComplete='off'
                 value={ccv}
+                maxLength={3}
                 onChange={e => setCcv(Number(e.target.value))}
               />
             </div>
