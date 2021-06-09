@@ -13,7 +13,7 @@ export default function AddCart() {
   useEffect(() => {},[]);
 
   function handleAddCard() {
-    
+
   }
 
   return (
@@ -22,9 +22,17 @@ export default function AddCart() {
       <main>
         <div className="content">
           <div className="card-view">
-            <p className="card-number">{'1234 1234 1234 1234'}</p>
+            <p className="card-number">{
+              cardNumber?
+              cardNumber:
+              'xxxx xxxx xxxx xxxx'
+            }</p>
             <div className="botton-card-data">
-              <p className="name">{'Alisson SIlva dos Santos'}</p>
+              <p className="name">{
+                fullName?
+                fullName:
+                'PROPRIETÁRIO DO CARTÃO'
+              }</p>
               <div className="date-and-ccv">
                 <p className="expiration-date">{'12/12'}</p>
                 <p className="ccv">{'***'}</p>
