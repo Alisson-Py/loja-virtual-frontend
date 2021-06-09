@@ -28,7 +28,8 @@ export default function Login() {
         email,
         firstName,
         lastName,
-        token
+        token,
+        hierarchy
       } = res.data;
 
       localStorage.setItem('id', id);
@@ -36,6 +37,7 @@ export default function Login() {
       localStorage.setItem('firstName', firstName);
       localStorage.setItem('lastName', lastName);
       localStorage.setItem('token', token);
+      localStorage.setItem('hierarchy', hierarchy);
       
       history.goBack();
     }).catch(err => {
