@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Header from '../../components/Header';
+import api from '../../services/api';
 
 import './index.css';
 
@@ -9,11 +10,36 @@ export default function AddCart() {
   const [cardNumberView, setCardNumberView] = useState<string>();
   const [expirationDate, setExpirationDate] = useState<string>();
   const [ccv, setCcv] = useState<number>();
+  const [token, setToken] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {},[]);
+  useEffect(() => {
+    const getToken = localStorage.get('token');
+    if (!getToken) {
+      window.location.replace('/login');
+      return;
+    };
+    setToken(getToken);
+  },[]);
 
   function handleAddCard() {
-
+    setLoading(true);
+    api.post('/card/create', {
+      fullName,
+      cardNumber,
+      expirationDate,
+      ccv,
+    },{
+      headers: {
+        authorization: `Baerer ${token}`
+      }
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log({err});
+    }).finally(() => {
+      setLoading(false);
+    })
   }
 
   function maskInput(value: number): string {
@@ -115,7 +141,11 @@ export default function AddCart() {
             <button
               className="add-card-submit-button"
               onClick={handleAddCard}
-            >Cadastrar Cartão</button>
+            >{
+              loading?
+              <div className="loading"/>:
+              'Cadastrar Cartão'
+            }</button>
           </div>
         </div>
       </main>
