@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
+import AddCart from './pages/AddCart';
 import Login from './pages/Login';
 
 import Product from './pages/Product';
@@ -16,6 +17,7 @@ export default function Routes() {
       <Route exact path="/" component={Product} />
       <Route exact path="/product/:id" component={ProductsDetails} />
       <Route exact path="/products/create" component={ProductCreate} />
+      <Route exact path="/add-card" component={AddCart} />
       {/* <Route exact path="/product/update/:id" component={} /> */}
       <Route exact path="/profile" component={Profile} />
       {/* <Route exact path="/profile/update" component={} /> */}

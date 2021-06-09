@@ -1,0 +1,57 @@
+.add-card main .content{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+}
+
+.add-card main .content .card-view {
+  width: 400px;
+  height: 250px;
+  border: 2px solid var(--primary-color);
+  font-size: 1.3rem;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #3c3c3c;
+}
+
+.add-card main .content .card-view .botton-card-data .date-and-ccv {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-card main .content .form {
+  width: fit-content;
+  margin-left: 50px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-card main .content .form input {
+  height: 40px;
+  border-bottom: 1px solid #2c2c2c;
+  margin: 10px 10px 0 10px;
+}
+
+.add-card main .content .form .date-and-ccv-input {
+  display: flex;
+}
+
+.add-card main .content .form .add-card-submit-button {
+  margin: 10px;
+  height: 40px;
+  border-radius: 6px;
+  background-color: var(--button-color);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

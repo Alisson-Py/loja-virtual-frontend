@@ -12,9 +12,11 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({title}) => {
   const [openProfile, setOpenProfile] = useState<boolean>(false);
   const [name, setName] = useState<string | null>();
+  const [hierarchy, setHierarchy] = useState<string | null>();
 
   useEffect(() => {
     setName(localStorage.getItem('firstName'));
+    setHierarchy(localStorage.getItem('hierarchy'));
   },[]);
 
   function handleLoOutUser() {
@@ -29,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({title}) => {
 
   return (
     <header>
-      <Link to='#' className="link">
+      <Link to='/' className="link">
         <img src={cartIcon} alt="cart" about="cart"/>
       </Link>
       <h1 className="title">{title}</h1>
@@ -46,6 +48,11 @@ const Header: React.FC<HeaderProps> = ({title}) => {
             id={!openProfile? 'hidden': ''}
           >
             <p className="name">Olá, {name}</p>
+            {
+              hierarchy === 'owner'?
+              <Link to="/products/create" className="link">Adicionar produto</Link>:
+              ''
+            }
             <Link to='/profile' className="link">Perfil</Link>
             <button
               className="log-out"
@@ -57,9 +64,9 @@ const Header: React.FC<HeaderProps> = ({title}) => {
             className="profile"
             id={!openProfile? 'hidden': ''}
           >
-        <Link to='/login' className="link">Login</Link>
-        <Link to='/register' className="link">Register</Link>
-      </div>
+            <Link to='/login' className="link">Login</Link>
+            <Link to='/register' className="link">Register</Link>
+          </div>
         )
       }
     </header>
