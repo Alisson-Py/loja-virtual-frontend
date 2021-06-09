@@ -14,7 +14,7 @@ export default function AddCart() {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    const getToken = localStorage.get('token');
+    const getToken = localStorage.getItem('token');
     if (!getToken) {
       window.location.replace('/login');
       return;
