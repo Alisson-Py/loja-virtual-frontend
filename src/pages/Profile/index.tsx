@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import api from '../../services/api';
 
+import './index.css';
+import userAccountIcon from '../../assets/user-account-icon.svg';
+
 interface UsersTypes {
   id: string;
   firstName: string;
@@ -45,7 +48,7 @@ export default function Profile() {
       <Header title="Perfil"/>
       <main>
         <div className="header">
-          <img src="" alt="" />
+          <img src={userAccountIcon} alt="account" />
           <h1 className="user-name">{`Olá ${user.firstName} ${user.lastName}`}</h1>
         </div>
         <div className="content">
@@ -57,16 +60,20 @@ export default function Profile() {
             <div className="data-block">
               <h3>Cartões</h3>
               <div className="card-grid">
-                <div className="card-view">
-                  <p>*** *** *** {1234}</p>
-                  <div className="botton-card-data">
-                    <p>Alisson Silva dos Santos</p>
-                    <div className="date-and-ccv">
-                      <p>12/30</p>
-                      <p>***</p>
+                {
+                  [1,2,3].map(item => (
+                    <div className="card-view" key={item.toString()}>
+                      <span>*** *** *** {`${item}${item}${item}${item}`}</span>
+                      <div className="botton-card-data">
+                        <span>Alisson Silva dos Santos</span>
+                        <div className="date-and-ccv">
+                          <span>12/30</span>
+                          <span>***</span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  ))
+                }
               </div>
             </div>
             <div className="data-block">
