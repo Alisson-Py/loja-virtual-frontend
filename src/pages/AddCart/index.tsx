@@ -34,8 +34,16 @@ export default function AddCart() {
                 'PROPRIETÁRIO DO CARTÃO'
               }</p>
               <div className="date-and-ccv">
-                <p className="expiration-date">{'12/12'}</p>
-                <p className="ccv">{'***'}</p>
+                <p className="expiration-date">{
+                  expirationDate?
+                  expirationDate:
+                  'MM/AA'
+                }</p>
+                <p className="ccv">{
+                  ccv?
+                  ccv:
+                  '***'
+                }</p>
               </div>
             </div>
           </div>
