@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import './index.css';
 import closeIcon from '../../assets/close-icon.svg';
 import addPhotoIcon from '../../assets/add-photo-icon.svg';
+import api from '../../services/api';
 
 export default function ProductCreate() {
   const [loading,setLoading] = useState<boolean>(false);
@@ -19,6 +20,7 @@ export default function ProductCreate() {
   async function handleCreateProduct() {
     setLoading(true);
     const data = new FormData();
+    const token = localStorage.getItem('token');
 
     data.append('name', name);
     data.append('description', description);
@@ -29,9 +31,18 @@ export default function ProductCreate() {
     if (file){
       data.append('image', file);
     }
-    console.log(data.getAll('image'));
-
-    setLoading(false);
+    api.post('/product', {data}, {
+      headers: {
+        authorization: `Baerer ${token}`
+      },
+    }).then(res => {
+      alert('success');
+    }).catch(err => {
+      alert('nao deu certo');
+    }).finally(() => {
+      setLoading(false);
+    });
+    return;
   };
 
   function handleUploadedImg(e: ChangeEvent<HTMLInputElement>) {
