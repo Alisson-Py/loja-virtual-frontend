@@ -19,11 +19,8 @@
   color: #3c3c3c;
 }
 
-.add-card main .content .card-view .botton-card-data {
-  width: fit-content;
-}
-
 .add-card main .content .card-view .botton-card-data .date-and-ccv {
+  width: 60%;
   display: flex;
   justify-content: space-between;
 }
