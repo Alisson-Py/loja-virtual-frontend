@@ -39,7 +39,7 @@ export default function Login() {
       
       history.goBack();
     }).catch(err => {
-      alert(err.response.data.err)
+      alert('deu algo errado')
     }).finally(() => {
       setLoading(false);
     })
