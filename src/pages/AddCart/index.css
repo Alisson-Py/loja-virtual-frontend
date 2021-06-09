@@ -24,3 +24,31 @@
   display: flex;
   justify-content: space-between;
 }
+
+.add-card main .content .form {
+  width: fit-content;
+  margin-left: 50px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-card main .content .form input {
+  height: 40px;
+  border-bottom: 1px solid #2c2c2c;
+  margin: 10px 10px 0 10px;
+}
+
+.add-card main .content .form .date-and-ccv-input {
+  display: flex;
+}
+
+.add-card main .content .form .add-card-submit-button {
+  margin: 10px;
+  height: 40px;
+  border-radius: 6px;
+  background-color: var(--button-color);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
