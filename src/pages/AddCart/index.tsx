@@ -26,7 +26,7 @@ export default function AddCart() {
     setLoading(true);
     api.post('/card/create', {
       fullName,
-      cardNumber,
+      creditCardNumber: cardNumber,
       expirationDate,
       ccv,
     },{
@@ -143,7 +143,7 @@ export default function AddCart() {
               onClick={handleAddCard}
             >{
               loading?
-              <div className="loading"/>:
+              <div className="loading-view"/>:
               'Cadastrar Cartão'
             }</button>
           </div>
