@@ -1,10 +1,12 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import Header from '../../components/Header';
 import api from '../../services/api';
 
 import './index.css';
 
 export default function AddCart() {
+  const history = useHistory();
   const [fullName, setFullName] = useState<string>();
   const [cardNumber, setCardNumber] = useState<number>();
   const [cardNumberView, setCardNumberView] = useState<string>();
@@ -34,7 +36,8 @@ export default function AddCart() {
         authorization: `Baerer ${token}`
       }
     }).then(res => {
-      console.log(res);
+      alert('cadastrado');
+      history.push('/profile');
     }).catch(err => {
       console.log({err});
     }).finally(() => {
