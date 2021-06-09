@@ -59,7 +59,7 @@ export default function Profile() {
 
   },[]);
 
-  if (!user) return (
+  if (!(user && creditCard)) return (
     <div className="profile">
       <Header title="Loading..."/>
     </div>
@@ -83,13 +83,13 @@ export default function Profile() {
               <h3>Cartões</h3>
               <div className="card-grid">
                 {
-                  [1,2,3].map(item => (
-                    <div className="card-view" key={item.toString()}>
-                      <span>*** *** *** {`${item}${item}${item}${item}`}</span>
+                  creditCard.map((card, index) => (
+                    <div className="card-view" key={index.toString()}>
+                      <span>*** *** *** {card.creditCardNumber}</span>
                       <div className="botton-card-data">
-                        <span>Alisson Silva dos Santos</span>
+                        <span>{card.fullName.toLowerCase()}</span>
                         <div className="date-and-ccv">
-                          <span>12/30</span>
+                          <span>{card.expirationDate}</span>
                           <span>***</span>
                         </div>
                       </div>
