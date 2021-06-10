@@ -50,8 +50,8 @@ export default function Profile() {
         authorization: `Baerer ${token}`
       }
     }).then(res => {
-    const data = res.data as CreditCardTypes[];
-    setCreditCard(data);
+      const data = res.data as CreditCardTypes[];
+      setCreditCard(data);
     }).catch(err => {
       alert('nao deu pra buscar os cartoes de creditos');
     });
@@ -82,6 +82,7 @@ export default function Profile() {
               <h3>Cartões</h3>
               <div className="card-grid">
                 {
+                  creditCard.length !== 0?
                   creditCard.map((card, index) => (
                     <div className="card-view" key={index.toString()}>
                       <span>*** *** *** {card.creditCardNumber}</span>
@@ -93,18 +94,27 @@ export default function Profile() {
                         </div>
                       </div>
                     </div>
-                  ))
+                  )):
+                  <Link to='/add-card' className="link">alterar/adcionar cartão</Link>
                 }
               </div>
             </div>
             <div className="data-block">
               <h3>Endereço</h3>
-              <p>
-                {user.street}<br/>
-                {user.numberHome}<br/>
-                {user.district}<br/>
-                {user.city}, {user.state}, {user.country}
-              </p>
+              {
+                user.street && user.cep?
+                <p>
+                  {user.street}<br/>
+                  {user.numberHome}<br/>
+                  {user.district}<br/>
+                  {user.city}, {user.state}, {user.country}
+                </p>:
+                <button
+                  className="update-account"
+                  onClick={() => {}}
+                >Atualizar cadastro
+                </button>
+              }
             </div>
           </div>
           <div className="actions">
