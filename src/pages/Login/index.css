@@ -71,3 +71,11 @@
   background-color: #172d4d;
   cursor: pointer;
 }
+
+.login main .form .to-register-page {
+  text-align: center;
+  color: #2c2c2c;
+  font-size: .75rem;
+  text-decoration: none;
+  margin-top: 6px;
+}
