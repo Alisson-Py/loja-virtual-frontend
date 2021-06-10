@@ -10,6 +10,8 @@ export default function UpdateProfile() {
   const [cep, setCep] = useState<number>();
   const [street, setStreet] = useState<string>('');
   const [district, setDistrict] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [numberHome, setNumberHome] = useState<number>();
   const [state, setState] = useState<string>('');
   const [country, setCountry] = useState<string>('');
   const [gender, setGender] = useState<string>('');
@@ -50,7 +52,9 @@ export default function UpdateProfile() {
       district,
       state,
       country,
-      gender
+      gender,
+      city,
+      numberHome
     };
 
     api.put('/user/update',data,{
@@ -87,6 +91,19 @@ export default function UpdateProfile() {
             />
           </div>
           <div className="input-block">
+            <label htmlFor="number-home">numero</label>
+            <input
+              type="text"
+              name="number-home"
+              id="number-home"
+              className="text-input"
+              value={numberHome}
+              onChange={e => setNumberHome(Number(e.target.value))}
+              placeholder="Ex.: 10"
+              autoComplete="off"
+            />
+          </div>
+          <div className="input-block">
             <label htmlFor="cep">CEP</label>
             <input
               type="text"
@@ -109,6 +126,19 @@ export default function UpdateProfile() {
               value={district}
               onChange={e => setDistrict(e.target.value)}
               placeholder="Ex.: Centro"
+              autoComplete="off"
+            />
+          </div>
+          <div className="input-block">
+            <label htmlFor="city">Cidade</label>
+            <input
+              type="text"
+              name="city"
+              id="city"
+              className="text-input"
+              value={city}
+              onChange={e => setCity(e.target.value)}
+              placeholder="Ex.: Salvador"
               autoComplete="off"
             />
           </div>
