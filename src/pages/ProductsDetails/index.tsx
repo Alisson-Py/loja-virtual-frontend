@@ -77,7 +77,11 @@ export default function ProductsDetails(props: RouteComponentProps) {
               <button
                 className="buy-button"
                 id={product.quantity === 0? 'disable': ''}
-                onClick={() => {}}
+                onClick={
+                  product.quantity === 0?
+                  () => {}:
+                  () => {}
+                }
               >
                 {
                   product.quantity === 0?
