@@ -22,7 +22,7 @@ export default function ProductCreate() {
     const data = new FormData();
     const token = localStorage.getItem('token');
 
-    data.append('name', name);
+    data.append('title', name);
     data.append('description', description);
     data.append('value', value);
     data.append('quantity', quantity);
@@ -31,7 +31,7 @@ export default function ProductCreate() {
     if (file){
       data.append('image', file);
     }
-    api.post('/product', {data}, {
+    api.post('/product', data, {
       headers: {
         authorization: `Baerer ${token}`
       },
