@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import api from '../../services/api';
 
@@ -31,6 +31,7 @@ interface CreditCardTypes {
 }
 
 export default function Profile() {
+  const history = useHistory();
   const [user, setUser] = useState<UsersTypes>();
   const [creditCard, setCreditCard] = useState<CreditCardTypes[]>();
 
@@ -58,6 +59,9 @@ export default function Profile() {
 
   },[]);
 
+  function handleAccounUpdateRedirect() {
+    history.push('/profile/update');
+  }
   if (!(user && creditCard)) return (
     <div className="profile">
       <Header title="Loading..."/>
@@ -111,7 +115,7 @@ export default function Profile() {
                 </p>:
                 <button
                   className="update-account"
-                  onClick={() => {}}
+                  onClick={handleAccounUpdateRedirect}
                 >Atualizar cadastro
                 </button>
               }
@@ -120,7 +124,7 @@ export default function Profile() {
           <div className="actions">
             <button
               className="update-account"
-              onClick={() => {}}
+              onClick={handleAccounUpdateRedirect}
             >Atualizar cadastro</button>
 
             <Link to='#' className="link">alterar senha</Link>
