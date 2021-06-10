@@ -72,21 +72,21 @@
   flex-direction: column;
 }
 
-.profile main .content .actions button {
+.profile main .content button {
   width: fit-content;
   border-radius: 4px;
   padding: 8px 16px;
   cursor: pointer;
 }
 
-.profile main .content .actions .update-account {
+.profile main .content .update-account {
   background-color: var(--button-color);
   color: #fff;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.profile main .content .actions .link {
+.profile main .content .link {
   font-weight: bold;
   text-decoration: none;
   color: #6c6c6c;
