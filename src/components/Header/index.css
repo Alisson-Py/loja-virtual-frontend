@@ -49,6 +49,11 @@ header .profile .link {
   margin-bottom: 4px;
 }
 
+header .open-popup {
+  background: transparent;
+  cursor: pointer;
+}
+
 header .profile .log-out {
   width: 100%;
   padding: 2px;

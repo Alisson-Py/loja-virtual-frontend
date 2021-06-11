@@ -35,7 +35,7 @@ export default function Register() {
       localStorage.setItem('lastName', lastName);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('hierarchy', res.data.hierarchy);
-      history.goBack();
+      history.push('/');
     }).catch(err => {
       alert('algo de errado');
     }).finally(() => {

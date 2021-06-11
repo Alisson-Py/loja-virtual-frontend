@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({title}) => {
       </Link>
       <h1 className="title">{title}</h1>
       <button
-        className="link"
+        className="open-popup"
         onClick={() => setOpenProfile(!openProfile)}
       >
         <img src={userIcon} alt="profile" about="profile" />

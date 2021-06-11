@@ -14,7 +14,7 @@ export default function ProductCreate() {
   const [description, setDescription] = useState<string>('');
   const [value, setValue] = useState<string>('');
   const [quantity, setQuantity] = useState<string>('');
-  const [inPromotion, setInPromotion] = useState<number>();
+  const [inPromotion, setInPromotion] = useState<boolean>();
   const [percent, setPercent] = useState<string>('');
 
   async function handleCreateProduct() {
@@ -22,7 +22,7 @@ export default function ProductCreate() {
     const data = new FormData();
     const token = localStorage.getItem('token');
 
-    data.append('name', name);
+    data.append('title', name);
     data.append('description', description);
     data.append('value', value);
     data.append('quantity', quantity);
@@ -31,7 +31,7 @@ export default function ProductCreate() {
     if (file){
       data.append('image', file);
     }
-    api.post('/product', {data}, {
+    api.post('/product', data, {
       headers: {
         authorization: `Baerer ${token}`
       },
@@ -137,7 +137,7 @@ export default function ProductCreate() {
               <input
                 type="checkbox"
                 className="input-text"
-                onChange={e => setInPromotion(Number(e.target.checked))}
+                onChange={e => setInPromotion(e.target.checked)}
               />
             </div>
             

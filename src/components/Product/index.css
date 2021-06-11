@@ -28,6 +28,8 @@
 .product-view .description {
   text-align: justify;
   color: #5c5c5c;
+  overflow: hidden;
+  height: 60px;
 }
 
 .product-view .value {

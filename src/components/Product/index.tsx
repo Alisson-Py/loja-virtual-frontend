@@ -25,7 +25,7 @@ const ProductsView: React.FC<ProductsProps> = ({props}) => {
 
   return (
     <div className="product-view" onClick={() => handleNavigateToProductDetails(props.id)}>
-      <img src={productIcon} alt={props.title} className="img" />
+      <img src={props.image} alt={props.title} className="img" />
       <h3 className="title">{props.title}</h3>
       <p className="description">{props.description}</p>
       <p className="value"><strong>{CurrencyConverter(props.value)}</strong><br/>

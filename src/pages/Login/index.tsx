@@ -7,6 +7,7 @@ import visibityIcon from '../../assets/visibility-icon.svg';
 import visibilityOffIcon from '../../assets/visibility-off-icon.svg';
 import api from '../../services/api';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   const history = useHistory();
@@ -88,6 +89,7 @@ export default function Login() {
               <p>Login</p>:
               <div className="loading-view"/>
             }</button>
+            <Link to="/register" className="to-register-page">nao possui cadastro?</Link>
           </div>
           <div/>
         </div>

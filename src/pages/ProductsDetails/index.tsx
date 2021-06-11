@@ -9,7 +9,7 @@ import favoriteIcon from '../../assets/favorite-icon.svg';
 import api from '../../services/api';
 import CurrencyConverter from '../../utils/CurrencyConverter';
 
-interface ProductType extends ProductsTypes {
+export interface ProductType extends ProductsTypes {
   quantity: number;
   isPromotion: boolean;
   percent?: number;
@@ -20,9 +20,11 @@ export default function ProductsDetails(props: RouteComponentProps) {
   const [product, setProduct] = useState<ProductType>();
 
   useEffect(() => {
-    const params = props.match.params;
+    const {id} = props.match.params as {id: string};
     api.get('/product', {
-      params
+      params: {
+        id
+      }
     }).then(res => {
       setProduct(res.data);
     }).catch(err => {
@@ -77,7 +79,11 @@ export default function ProductsDetails(props: RouteComponentProps) {
               <button
                 className="buy-button"
                 id={product.quantity === 0? 'disable': ''}
-                onClick={() => {}}
+                onClick={
+                  product.quantity === 0?
+                  () => {}:
+                  () => {history.push(`/product/buy/${product.id}`)}
+                }
               >
                 {
                   product.quantity === 0?
