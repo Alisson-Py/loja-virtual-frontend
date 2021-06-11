@@ -68,7 +68,7 @@ export default function BuyProduct(props: RouteComponentProps) {
       productId: product?.id,
       quantity: finalQuantityProduct,
       ccv,
-      cardNumber: card? card[0].creditCardNumber: 1
+      cardId: card? card[0].id: 1
     },{
       headers: {
         authorization: `Baerer ${token}`
