@@ -23,7 +23,7 @@ interface UsersTypes {
   hierarchy: 'owner' | 'user';
 }
 
-interface CreditCardTypes {
+export interface CreditCardTypes {
   id: string;
   creditCardNumber: string;
   fullName: string;
