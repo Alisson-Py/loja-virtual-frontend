@@ -15,10 +15,16 @@ export interface ProductsTypes {
 
 export default function Product() {
   const [products, setProducts] = useState<ProductsTypes[]>([]);
+  const [promotionProducts, setPromotionProducts] = useState<ProductsTypes[]>([]);
 
   useEffect(() => {
-    api.get('/products').then(res => {
+    api.get('/product/search?query=recent').then(res => {
       setProducts(res.data);
+    }).catch(err => {
+      alert(err.message);
+    });
+    api.get('/product/search?query=in-promotion').then(res => {
+      setPromotionProducts(res.data);
     }).catch(err => {
       alert(err.message);
     });
@@ -42,7 +48,7 @@ export default function Product() {
           <h2 className="sub-title">Em promoção</h2>
           <div className="product-container">
           {
-            products.map((item, index) => (
+            promotionProducts.map((item, index) => (
               <ProductsView props={item} key={index}/>
             ))
           }
