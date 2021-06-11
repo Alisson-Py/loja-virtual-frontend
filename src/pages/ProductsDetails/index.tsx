@@ -9,7 +9,7 @@ import favoriteIcon from '../../assets/favorite-icon.svg';
 import api from '../../services/api';
 import CurrencyConverter from '../../utils/CurrencyConverter';
 
-interface ProductType extends ProductsTypes {
+export interface ProductType extends ProductsTypes {
   quantity: number;
   isPromotion: boolean;
   percent?: number;
@@ -82,7 +82,7 @@ export default function ProductsDetails(props: RouteComponentProps) {
                 onClick={
                   product.quantity === 0?
                   () => {}:
-                  () => {}
+                  () => {history.push(`/product/buy/${product.id}`)}
                 }
               >
                 {
