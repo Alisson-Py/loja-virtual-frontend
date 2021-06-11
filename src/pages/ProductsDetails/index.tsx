@@ -20,9 +20,11 @@ export default function ProductsDetails(props: RouteComponentProps) {
   const [product, setProduct] = useState<ProductType>();
 
   useEffect(() => {
-    const params = props.match.params;
+    const {id} = props.match.params as {id: string};
     api.get('/product', {
-      params
+      params: {
+        id
+      }
     }).then(res => {
       setProduct(res.data);
     }).catch(err => {
