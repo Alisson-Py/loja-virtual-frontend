@@ -14,7 +14,7 @@ export default function ProductCreate() {
   const [description, setDescription] = useState<string>('');
   const [value, setValue] = useState<string>('');
   const [quantity, setQuantity] = useState<string>('');
-  const [inPromotion, setInPromotion] = useState<number>();
+  const [inPromotion, setInPromotion] = useState<boolean>();
   const [percent, setPercent] = useState<string>('');
 
   async function handleCreateProduct() {
@@ -137,7 +137,7 @@ export default function ProductCreate() {
               <input
                 type="checkbox"
                 className="input-text"
-                onChange={e => setInPromotion(Number(e.target.checked))}
+                onChange={e => setInPromotion(e.target.checked)}
               />
             </div>
             
