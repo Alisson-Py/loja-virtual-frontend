@@ -34,6 +34,8 @@ export default function UpdateProfile() {
       setGender('M');
       setState(data.state);
       setStreet(data.street);
+      setCity(data.city);
+      setNumberHome(data.numberHome);
     }).catch(err => {
       console.log(err);
     });
