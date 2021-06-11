@@ -106,10 +106,16 @@ export default function Profile() {
             <div className="data-block">
               <h3>Endereço</h3>
               {
-                user.street && user.cep?
+                user.street &&
+                user.cep &&
+                user.numberHome &&
+                user.district &&
+                user.city &&
+                user.state &&
+                user.country?
                 <p>
-                  {user.street}<br/>
-                  {user.numberHome}<br/>
+                  {user.street}, {user.numberHome}<br/>
+                  {user.cep}<br/>
                   {user.district}<br/>
                   {user.city}, {user.state}, {user.country}
                 </p>:
@@ -122,10 +128,21 @@ export default function Profile() {
             </div>
           </div>
           <div className="actions">
-            <button
-              className="update-account"
-              onClick={handleAccounUpdateRedirect}
-            >Atualizar cadastro</button>
+            {
+              user.street &&
+              user.cep &&
+              user.numberHome &&
+              user.district &&
+              user.city &&
+              user.state &&
+              user.country?
+              <div/>:
+              <button
+                className="update-account"
+                onClick={handleAccounUpdateRedirect}
+              >Atualizar cadastro
+              </button>
+            }
 
             <Link to='#' className="link">alterar senha</Link>
             <Link to='/add-card' className="link">alterar/adcionar cartão</Link>
