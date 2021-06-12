@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router';
 import Header from '../../components/Header';
 import api from '../../services/api';
 
@@ -22,7 +22,7 @@ export default function UpdateProfile() {
     const token = localStorage.getItem('token');
     const id = localStorage.getItem('id');
     if (!(email && token && id)) {
-      window.location.replace('/login');
+      history.push('/login');
       return;
     };
 
