@@ -5,8 +5,10 @@ import './index.css';
 import closeIcon from '../../assets/close-icon.svg';
 import addPhotoIcon from '../../assets/add-photo-icon.svg';
 import api from '../../services/api';
+import { useHistory } from 'react-router-dom';
 
 export default function ProductCreate() {
+  const history = useHistory();
   const [loading,setLoading] = useState<boolean>(false);
   const [isVisible,setIsVisible] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>();
@@ -37,6 +39,7 @@ export default function ProductCreate() {
       },
     }).then(res => {
       alert('success');
+      history.goBack();
     }).catch(err => {
       alert('nao deu certo');
     }).finally(() => {
