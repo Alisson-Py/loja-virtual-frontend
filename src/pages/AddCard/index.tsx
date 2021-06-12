@@ -98,8 +98,8 @@ export default function AddCart() {
           <div className="form">
             <input
               type="text"
-              name="card-number"
-              id="card-number"
+              name="card-full-name"
+              id="card-full-name"
               placeholder="Digite o nome do titular..."
               autoComplete='off'
               value={fullName}
