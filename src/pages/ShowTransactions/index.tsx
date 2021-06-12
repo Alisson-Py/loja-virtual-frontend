@@ -33,7 +33,7 @@ export default function ShowTransactions() {
     }).catch(err => {
       console.log(err);
     })
-  },[]);
+  },[history]);
 
   if (!transactions) return (
     <div className="show-payment">

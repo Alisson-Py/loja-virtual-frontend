@@ -39,7 +39,7 @@ export default function UpdateProfile() {
     }).catch(err => {
       console.log(err);
     });
-  },[]);
+  },[history]);
 
 
   function hadnleUpdateProfile() {
