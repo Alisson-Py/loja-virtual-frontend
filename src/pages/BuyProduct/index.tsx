@@ -129,22 +129,20 @@ export default function BuyProduct(props: RouteComponentProps) {
         </div>
         <div className="final-purchase">
           <div className="credit-card-selection">
+          <select
+            name="cards-show"
+            id="cards-show"
+            value={cardSelected}
+            onChange={e => setCardSelected(e.target.value)}
+          >
             {
               card?
-                <select
-                name="cards-show"
-                id="cards-show"
-                value={cardSelected}
-                onChange={e => setCardSelected(e.target.value)}
-              >
-                {
-                  card.map(item => (
-                    <option key={item.id} value={item.id}>*** {item.creditCardNumber}</option>
-                  ))
-                }
-              </select>:
-              <Link to="/card/create">Adicionar Cartão</Link>
+              card.map(item => (
+                <option key={item.id} value={item.id}>*** {item.creditCardNumber}</option>
+              )):
+              <Link to="/add-card">adicionar cartao</Link>
             }
+          </select>
           </div>
           <button
             className="checkout-button"
