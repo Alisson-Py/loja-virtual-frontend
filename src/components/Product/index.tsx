@@ -3,7 +3,6 @@ import CurrencyConverter from '../../utils/CurrencyConverter';
 import { useHistory } from 'react-router';
 
 import './index.css';
-import productIcon from '../../assets/product-icon.png';
 import favoriteIcon from '../../assets/favorite-icon.svg';
 
 interface ProductsProps {
