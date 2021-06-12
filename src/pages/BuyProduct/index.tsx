@@ -14,29 +14,22 @@ import './index.css';
 export default function BuyProduct(props: RouteComponentProps) {
   const [product, setProduct] = useState<ProductType>();
   const [card, setCard] = useState<CreditCardTypes[]>();
+  const [cardSelected, setCardSelected] = useState<string>()
   const [finalQuantityProduct, setFinalQuantityProduct] = useState<number>(1);
-  const [token, setToken] = useState<string>();
   const [ccv, setCcv] = useState<number>();
+  const [loading, setLoading] = useState<boolean>(false);
 
 
   useEffect(() => {
     const {id} = props.match.params as {id: string};
-    const partToken = localStorage.getItem('token');
-    if (!partToken) {
-      window.location.replace('/login');
-      return;
-    } 
-    setToken(partToken);
+    const token = localStorage.getItem('token');
 
     api.get('/product', {
-      params: {
-        id
-      }
+      params: {id}
     }).then(res => {
       setProduct(res.data);
     }).catch(err => {
-      console.log(err.message);
-    }).finally(() => {
+      console.log(err)
     });
 
     api.get('/cards', {
@@ -47,9 +40,7 @@ export default function BuyProduct(props: RouteComponentProps) {
       setCard(res.data);
     }).catch(err => {
       console.log(err);
-    }).finally(() => {});
-
-
+    })
   },[]);
 
   function renderOpnions(quant: number): any {
@@ -63,20 +54,27 @@ export default function BuyProduct(props: RouteComponentProps) {
   };
 
   function handleFinalCheckout() {
-    
-    api.post('/pay/create', {
-      productId: product?.id,
+    setLoading(true)
+    const token = localStorage.getItem('token');
+    if(!(product && card)) {
+      alert('dados faltando');
+      return
+    }
+    api.post('/checkout',{
+      productId: product.id,
       quantity: finalQuantityProduct,
-      ccv,
-      cardId: card? card[0].id: 1
+      ccv: 123,
+      cardId: card[0].id,
     },{
       headers: {
         authorization: `Baerer ${token}`
       }
     }).then(res => {
-      alert('compra realizada com sucesso');
+      console.log(res);
     }).catch(err => {
-      alert('claro que vai dar error, ta tudo errado');
+      console.log(err);
+    }).finally(() => {
+      setLoading(false);
     })
   }
 
@@ -131,12 +129,27 @@ export default function BuyProduct(props: RouteComponentProps) {
         </div>
         <div className="final-purchase">
           <div className="credit-card-selection">
-            <span>cartao 1</span>
+            <select
+              name="cards-show"
+              id="cards-show"
+              value={cardSelected}
+              onChange={e => setCardSelected(e.target.value)}
+            >
+              {
+                card?.map(item => (
+                  <option key={item.id} value={item.id}>*** {item.creditCardNumber}</option>
+                ))
+              }
+            </select>
           </div>
           <button
             className="checkout-button"
             onClick={handleFinalCheckout}
-          >Comprar</button>
+          >{
+            loading?
+            <div className="loading-view"/>:
+            'Comprar'
+          }</button>
         </div>
       </main>
     </div>
