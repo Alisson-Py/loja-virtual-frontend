@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import './index.css';
 import userIcon from '../../assets/user-icon.svg';
 import cartIcon from '../../assets/cart-icon.svg';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 interface HeaderProps {
   title: string;
 }
 
 const Header: React.FC<HeaderProps> = ({title}) => {
+  const history = useHistory();
   const [openProfile, setOpenProfile] = useState<boolean>(false);
   const [name, setName] = useState<string | null>();
   const [hierarchy, setHierarchy] = useState<string | null>();
@@ -27,6 +28,7 @@ const Header: React.FC<HeaderProps> = ({title}) => {
     localStorage.removeItem('token');
     setName(null);
     setOpenProfile(false);
+    history.push('/')
   }
 
   return (
