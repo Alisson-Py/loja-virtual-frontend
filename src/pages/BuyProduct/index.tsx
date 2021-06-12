@@ -55,6 +55,8 @@ export default function BuyProduct(props: RouteComponentProps) {
 
   function handleFinalCheckout() {
     setLoading(true)
+    const cv = prompt('ccv?');
+    setCcv(Number(cv) || 0);
     const token = localStorage.getItem('token');
     if(!(product && card)) {
       alert('dados faltando');
@@ -63,7 +65,7 @@ export default function BuyProduct(props: RouteComponentProps) {
     api.post('/checkout',{
       productId: product.id,
       quantity: finalQuantityProduct,
-      ccv: 123,
+      ccv,
       cardId: card[0].id,
     },{
       headers: {
