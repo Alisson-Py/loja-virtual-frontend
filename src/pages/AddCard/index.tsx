@@ -22,7 +22,7 @@ export default function AddCart() {
       return;
     };
     setToken(getToken);
-  },[]);
+  },[history]);
 
   function handleAddCard() {
     setLoading(true);
