@@ -1,11 +1,11 @@
-import React, { ChangeEvent } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import Header from '../../components/Header';
 import ProductsView from '../../components/Product';
-import api from '../../services/api';
 import CurrencyConverter from '../../utils/CurrencyConverter';
+import { Link } from 'react-router-dom';
+import api from '../../services/api';
+
 import { ProductType } from '../ProductsDetails';
 import { CreditCardTypes } from '../Profile';
 
@@ -129,18 +129,22 @@ export default function BuyProduct(props: RouteComponentProps) {
         </div>
         <div className="final-purchase">
           <div className="credit-card-selection">
-            <select
-              name="cards-show"
-              id="cards-show"
-              value={cardSelected}
-              onChange={e => setCardSelected(e.target.value)}
-            >
-              {
-                card?.map(item => (
-                  <option key={item.id} value={item.id}>*** {item.creditCardNumber}</option>
-                ))
-              }
-            </select>
+            {
+              card?
+                <select
+                name="cards-show"
+                id="cards-show"
+                value={cardSelected}
+                onChange={e => setCardSelected(e.target.value)}
+              >
+                {
+                  card.map(item => (
+                    <option key={item.id} value={item.id}>*** {item.creditCardNumber}</option>
+                  ))
+                }
+              </select>:
+              <Link to="/card/create">Adicionar Cartão</Link>
+            }
           </div>
           <button
             className="checkout-button"
