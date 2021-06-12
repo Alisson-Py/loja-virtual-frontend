@@ -2,5 +2,25 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 20px 0;
+}
+
+.update-profile main .form {
+  border: 1px solid var(--primary-color);
+}
+
+.update-profile main .form .input-block {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 4px;
+  grid-column-gap: 10px;
+}
+
+.update-profile main .form .input-block input {
+  border-bottom: 2px solid #2c2c2c;
+  height: 40px;
+  padding: 4px;
+  margin-top: 10px;
 }
