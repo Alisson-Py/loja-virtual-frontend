@@ -41,7 +41,7 @@ export default function BuyProduct(props: RouteComponentProps) {
     }).catch(err => {
       console.log(err);
     })
-  },[]);
+  },[props]);
 
   function renderOpnions(quant: number): any {
     let array = [];
