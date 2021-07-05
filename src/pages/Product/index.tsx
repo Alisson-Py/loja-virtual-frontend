@@ -37,6 +37,10 @@ export default function Product() {
         <section>
           <h2 className="sub-title">Recentes</h2>
           <div className="product-container">
+            {
+            console.log(process.env.REACT_APP_URL)
+
+            }
           {
             products.map((item, index) => (
               <ProductsView props={item} key={index}/>
