@@ -1,6 +1,4 @@
-import React, { ChangeEvent } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import Header from '../../components/Header';
 import ProductsView from '../../components/Product';
@@ -14,19 +12,17 @@ import './index.css';
 export default function BuyProduct(props: RouteComponentProps) {
   const [product, setProduct] = useState<ProductType>();
   const [card, setCard] = useState<CreditCardTypes[]>();
+  const [finalCardSelected, setFinalCardSelected] = useState<string>();
   const [finalQuantityProduct, setFinalQuantityProduct] = useState<number>(1);
-  const [token, setToken] = useState<string>();
-  const [ccv, setCcv] = useState<number>();
 
 
   useEffect(() => {
     const {id} = props.match.params as {id: string};
-    const partToken = localStorage.getItem('token');
-    if (!partToken) {
+    const token = localStorage.getItem('token');
+    if (!token) {
       window.location.replace('/login');
       return;
     } 
-    setToken(partToken);
 
     api.get('/product', {
       params: {
@@ -50,7 +46,7 @@ export default function BuyProduct(props: RouteComponentProps) {
     }).finally(() => {});
 
 
-  },[]);
+  }, [props]);
 
   function renderOpnions(quant: number): any {
     let array = [];
@@ -62,13 +58,16 @@ export default function BuyProduct(props: RouteComponentProps) {
     ))
   };
 
-  function handleFinalCheckout() {
+  function handleFinalCheckout(e: FormEvent) {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    const ccv = prompt('CCV');
     
-    api.post('/pay/create', {
+    api.post('/checkout', {
       productId: product?.id,
       quantity: finalQuantityProduct,
       ccv,
-      cardNumber: card? card[0].creditCardNumber: 1
+      cardId: finalCardSelected
     },{
       headers: {
         authorization: `Baerer ${token}`
@@ -76,11 +75,12 @@ export default function BuyProduct(props: RouteComponentProps) {
     }).then(res => {
       alert('compra realizada com sucesso');
     }).catch(err => {
+      console.log({err})
       alert('claro que vai dar error, ta tudo errado');
     })
   }
 
-  if(!product) return (
+  if(!(product && card)) return (
     <Header title="Loading..."/>
   );
 
@@ -131,7 +131,18 @@ export default function BuyProduct(props: RouteComponentProps) {
         </div>
         <div className="final-purchase">
           <div className="credit-card-selection">
-            <span>cartao 1</span>
+              <select
+                name="quanttity"
+                id="quantity"
+                value={finalCardSelected}
+                onChange={e => setFinalCardSelected(e.target.value)}
+              >
+                {
+                  card.map((card, index) => (
+                    <option key={index} value={card.id}>**** {card.creditCardNumber}</option>
+                  ))
+                }
+              </select>
           </div>
           <button
             className="checkout-button"
