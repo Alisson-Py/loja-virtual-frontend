@@ -1,9 +1,8 @@
 import React, { useState, FormEvent, useEffect } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import ProductsView from '../../components/Product';
 import CurrencyConverter from '../../utils/CurrencyConverter';
-import { Link } from 'react-router-dom';
 import api from '../../services/api';
 
 import { ProductType } from '../ProductsDetails';
@@ -12,11 +11,12 @@ import { CreditCardTypes } from '../Profile';
 import './index.css';
 
 export default function BuyProduct(props: RouteComponentProps) {
+  const history = useHistory();
   const [product, setProduct] = useState<ProductType>();
   const [card, setCard] = useState<CreditCardTypes[]>();
-  const [loading, setLoading] = useState<boolean>(false);
   const [finalCardSelected, setFinalCardSelected] = useState<string>();
   const [finalQuantityProduct, setFinalQuantityProduct] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const {id} = props.match.params as {id: string};
@@ -58,6 +58,7 @@ export default function BuyProduct(props: RouteComponentProps) {
 
   function handleFinalCheckout(e: FormEvent) {
     e.preventDefault();
+    setLoading(true);
     const token = localStorage.getItem('token');
     const ccv = prompt('CCV');
     
@@ -72,8 +73,10 @@ export default function BuyProduct(props: RouteComponentProps) {
       }
     }).then(res => {
       console.log(res);
+      history.push('/');
     }).catch(err => {
       console.log(err);
+      alert('Problemas com a compra');
     }).finally(() => {
       setLoading(false);
     })
