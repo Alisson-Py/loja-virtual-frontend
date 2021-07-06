@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import Header from '../../components/Header';
 import ProductsView from '../../components/Product';
@@ -14,15 +14,17 @@ import './index.css';
 export default function BuyProduct(props: RouteComponentProps) {
   const [product, setProduct] = useState<ProductType>();
   const [card, setCard] = useState<CreditCardTypes[]>();
-  const [cardSelected, setCardSelected] = useState<string>()
-  const [finalQuantityProduct, setFinalQuantityProduct] = useState<number>(1);
-  const [ccv, setCcv] = useState<number>();
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [finalCardSelected, setFinalCardSelected] = useState<string>();
+  const [finalQuantityProduct, setFinalQuantityProduct] = useState<number>(1);
 
   useEffect(() => {
     const {id} = props.match.params as {id: string};
     const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.replace('/login');
+      return;
+    } 
 
     api.get('/product', {
       params: {id}
@@ -40,8 +42,8 @@ export default function BuyProduct(props: RouteComponentProps) {
       setCard(res.data);
     }).catch(err => {
       console.log(err);
-    })
-  },[props]);
+    }).finally(() => {});
+  }, [props]);
 
   function renderOpnions(quant: number): any {
     let array = [];
@@ -53,20 +55,17 @@ export default function BuyProduct(props: RouteComponentProps) {
     ))
   };
 
-  function handleFinalCheckout() {
-    setLoading(true)
-    const cv = prompt('ccv?');
-    setCcv(Number(cv) || 0);
+
+  function handleFinalCheckout(e: FormEvent) {
+    e.preventDefault();
     const token = localStorage.getItem('token');
-    if(!(product && card)) {
-      alert('dados faltando');
-      return
-    }
-    api.post('/checkout',{
-      productId: product.id,
+    const ccv = prompt('CCV');
+    
+    api.post('/checkout', {
+      productId: product?.id,
       quantity: finalQuantityProduct,
       ccv,
-      cardId: card[0].id,
+      cardId: finalCardSelected
     },{
       headers: {
         authorization: `Baerer ${token}`
@@ -80,7 +79,7 @@ export default function BuyProduct(props: RouteComponentProps) {
     })
   }
 
-  if(!product) return (
+  if(!(product && card)) return (
     <Header title="Loading..."/>
   );
 
@@ -131,20 +130,18 @@ export default function BuyProduct(props: RouteComponentProps) {
         </div>
         <div className="final-purchase">
           <div className="credit-card-selection">
-          <select
-            name="cards-show"
-            id="cards-show"
-            value={cardSelected}
-            onChange={e => setCardSelected(e.target.value)}
-          >
-            {
-              card?
-              card.map(item => (
-                <option key={item.id} value={item.id}>*** {item.creditCardNumber}</option>
-              )):
-              <Link to="/add-card">adicionar cartao</Link>
-            }
-          </select>
+            <select
+              name="quanttity"
+              id="quantity"
+              value={finalCardSelected}
+              onChange={e => setFinalCardSelected(e.target.value)}
+            >
+              {
+                card.map((card, index) => (
+                  <option key={index} value={card.id}>**** {card.creditCardNumber}</option>
+                ))
+              }
+            </select>
           </div>
           <button
             className="checkout-button"
